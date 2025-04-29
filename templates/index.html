@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mt-4">Taco-Tel Subscriber Churn Prediction</h2>
+        <div class="card mt-4">
+            <div class="card-body">
+                <!-- Tab navigation -->
+                <ul class="nav nav-tabs" id="predictionTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="single-tab" data-bs-toggle="tab" href="#single" role="tab"
+                            aria-controls="single" aria-selected="true">Single Prediction</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="bulk-tab" data-bs-toggle="tab" href="#bulk" role="tab"
+                            aria-controls="bulk" aria-selected="false">Bulk Prediction</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="reports-tab" data-bs-toggle="tab" href="#reports" role="tab"
+                            aria-controls="reports" aria-selected="false">Downloadable Reports</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab"
+                            aria-controls="dashboard" aria-selected="false">Dashboard</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="alerts-tab" data-bs-toggle="tab" href="#alerts" role="tab"
+                            aria-controls="alerts" aria-selected="false">Alerts</a>
+                    </li>
+                </ul>
+
+                <!-- Tab content -->
+                <div class="tab-content" id="predictionTabsContent">
+                    <!-- Single Prediction Tab -->
+                    <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
+                        <h4></h4>
+                        <h4>Enter Customer Details for Prediction</h4>
+                        <form id="singlePredictionForm" method="POST" action="/predict">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="tenure_months" class="form-label">Tenure in Months</label>
+                                    <input type="number" class="form-control" id="tenure_months" name="Tenure in Months" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="monthly_charges" class="form-label">Monthly Charges</label>
+                                    <input type="number" step="any" class="form-control" id="monthly_charges" name="Monthly Charges" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="Age" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="Gender" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="partner" class="form-label">Partner</label>
+                                    <select class="form-select" id="partner" name="Partner" required>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="online_security" class="form-label">Online Security</label>
+                                    <select class="form-select" id="online_security" name="Online Security" required>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="number_of_dependents" class="form-label">Number of Dependents</label>
+                                    <input type="number" class="form-control" id="number_of_dependents" name="Number of Dependents" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="zip_code" class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control" id="zip_code" name="Zip Code" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="dependents" class="form-label">Dependents</label>
+                                    <select class="form-select" id="dependents" name="Dependents" required>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="paperless_billing" class="form-label">Paperless Billing</label>
+                                    <select class="form-select" id="paperless_billing" name="Paperless Billing" required>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="total_charges" class="form-label">Total Charges</label>
+                                    <input type="number" step="any" class="form-control" id="total_charges" name="Total Charges" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="avg_monthly_long_distance_charges" class="form-label">Avg Monthly Long Distance Charges</label>
+                                    <input type="number" step="any" class="form-control" id="avg_monthly_long_distance_charges" name="Avg Monthly Long Distance Charges" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="avg_monthly_gb_download" class="form-label">Avg Monthly GB Download</label>
+                                    <input type="number" step="any" class="form-control" id="avg_monthly_gb_download" name="Avg Monthly GB Download" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="monthly_charge" class="form-label">Monthly Charge</label>
+                                    <input type="number" step="any" class="form-control" id="monthly_charge" name="Monthly Charge" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="total_extra_data_charges" class="form-label">Total Extra Data Charges</label>
+                                    <input type="number" step="any" class="form-control" id="total_extra_data_charges" name="Total Extra Data Charges" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="total_long_distance_charges" class="form-label">Total Long Distance Charges</label>
+                                    <input type="number" step="any" class="form-control" id="total_long_distance_charges" name="Total Long Distance Charges" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="total_revenue" class="form-label">Total Revenue</label>
+                                    <input type="number" step="any" class="form-control" id="total_revenue" name="Total Revenue" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="satisfaction_score" class="form-label">Satisfaction Score</label>
+                                    <input type="number" step="any" class="form-control" id="satisfaction_score" name="Satisfaction Score" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="number_of_referrals" class="form-label">Number of Referrals</label>
+                                    <input type="number" class="form-control" id="number_of_referrals" name="Number of Referrals" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Predict</button>
+                        </form>
+
+                        <h5 id="predictionResult" class="mt-4" style="display:none;">Prediction Result: <span id="resultText"></span></h5>
+                    </div>
+
+                    <!-- Bulk Prediction Tab -->
+                    <div class="tab-pane fade" id="bulk" role="tabpanel" aria-labelledby="bulk-tab">
+                        <h4 class="mt-4">Upload Excel File for Bulk Prediction</h4>
+                        <form id="bulkPredictionForm" method="POST" action="/bulk_predict" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="excel_file" class="form-label">Choose Excel File</label>
+                                <input type="file" class="form-control" id="excel_file" name="file" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload and Predict</button>
+                        </form>
+
+                        <div id="bulkPredictionStatus" class="mt-4" style="display:none;">
+                            <h5>Prediction for Bulk Upload Complete!</h5>
+                            <a href="/download_predictions" class="btn btn-success">Download Predictions</a>
+                        </div>
+                    </div>
+
+                    <!-- Downloadable Reports Tab -->
+                    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
+                        <h4 class="mt-4">Downloadable Reports</h4>
+                        <h2>Prediction Summary</h2>
+                        <iframe src="/charts" width="100%" height="600" frameborder="0"></iframe>
+                        <script>
+                            const churnData = {{ churn_counts | tojson }};
+                            const ctx = document.getElementById('churnChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: Object.keys(churnData),
+                                    datasets: [{
+                                        label: 'Predictions',
+                                        data: Object.values(churnData),
+                                        backgroundColor: ['#36a2eb', '#ff6384'],
+                                        hoverOffset: 4
+                                    }]
+                                }
+                            });
+                        </script>
+                        <p>Here you can generate and download various reports based on predictions or customer data.</p>
+                        <a href="/charts" class="btn btn-info">📊 Expand Churn Charts</a>
+                        <a href="/download_predictions" class="btn btn-info">Download Churn Prediction Report</a>
+                    </div>
+
+                    <!-- Dashboard Tab -->
+                    <div class="tab-pane fade" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                        <h4 class="mt-4">Dashboard</h4>
+                        <p>Overview of churn prediction model performance and customer churn trends.</p>
+                        <!-- Placeholder for dashboard content -->
+                        <div id="dashboardContent">
+                            <!-- Dynamic charts and tables for the dashboard can be added here -->
+                            <p>Current Model Accuracy: <span id="accuracy">93%</span></p>
+                        </div>
+                        <iframe src="/dashapp/" style="width:100%; height: 800px; border:none;"></iframe>
+                        
+                    </div>
+
+                    <!-- Alerts Tab -->
+                    <div class="tab-pane fade" id="alerts" role="tabpanel" aria-labelledby="alerts-tab">
+                        <h4 class="mt-4">Alerts</h4>
+                        <p>Get notified for key events like high churn risks or model updates.</p>
+
+                        <div id="alertContent">
+                            <p id="alertStatus">You have no active alerts.</p>
+
+                            <!-- Dynamic Alert Message -->
+                        <div id="alertContent">
+                            
+                            <a href="/download_churn_alerts" class="btn btn-success mt-2" download>
+                                Download At-Risk Customers
+                            </a>
+                        </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                fetch("/alerts_data")
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        document.getElementById("alertStatus").textContent = data.message;
+                                    });
+                            });
+                            </script>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="/logs" target="_blank">🔍 View Prediction Logs</a> |
+                        <a href="/download_predictions">📥 Download Prediction Logs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for handling Single Prediction
+        const singlePredictionForm = document.getElementById("singlePredictionForm");
+        singlePredictionForm.onsubmit = function(event) {
+            event.preventDefault();  // Prevent default form submission
+            const formData = new FormData(singlePredictionForm);  // Gather form data
+            
+            fetch("/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())  // Parse JSON response
+            .then(data => {
+                const resultText = document.getElementById("resultText");
+                const predictionResult = document.getElementById("predictionResult");
+                
+                // Display prediction result
+                resultText.innerText = data.prediction ? "Churned" : "Not Churned";
+                predictionResult.style.display = "block";  // Show prediction result
+            })
+            .catch(error => {
+                console.error("Error occurred while making prediction:", error);
+            });
+        };
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/alerts_data")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("alertStatus").textContent = data.message;
+                })
+                .catch(err => {
+                    document.getElementById("alertStatus").textContent = "Failed to load alerts.";
+                });
+        });
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+Zip Code,Gender,Partner,Dependents,Tenure Months,Online Security,Paperless Billing,Monthly Charges,Total Charges,Age,Number of Dependents,Number of Referrals,Tenure in Months,Avg Monthly Long Distance Charges,Avg Monthly GB Download,Monthly Charge,Total Extra Data Charges,Total Long Distance Charges,Total Revenue,Satisfaction Score,Predicted Churn
+90003,1,0,0,2,1,1,53.85,108.15,37,0,0,0.0140845070422535,0.2094418883776755,0.2470588235294117,0.354228855721393,0,20.94,0.0090090466784523,1,Churned
+90005,0,0,1,2,0,1,70.7,151.65,19,1,0,0.0140845070422535,0.1824364872974594,0.6,0.5218905472636816,0,18.24,0.0124209941812914,2,Churned
+90006,0,0,1,8,0,1,99.65,820.5,31,1,0,0.0985915492957746,0.2430486097219444,0.3058823529411765,0.8099502487562189,0,97.2,0.0749574760954609,3,Churned

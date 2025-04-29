@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 200px; height: 400px; margin: auto;"></div>
+    <canvas id="churnChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client/dist/socket.io.min.js"></script>
+    <script>
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('new_prediction', function(data) {
+            // Update chart with new data
+        });
+    </script>
+    <script>
+        const ctx = document.getElementById('churnChart').getContext('2d');
+        const churnCounts = {{ churn_counts | tojson }};
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(churnCounts),
+                datasets: [{
+                    data: Object.values(churnCounts),
+                    backgroundColor: ['#FF5733', '#33FF57'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' predictions';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
