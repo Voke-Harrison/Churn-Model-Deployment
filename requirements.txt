@@ -74,3 +74,4 @@ gunicorn
 eventlet
 Flask
 flask_socketio
+openpyxl
